@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
-import desktopImage from "./assets/Desktop.png";
-import mobileImage from "./assets/Mobile.png";
+import desktopImage from "./assets/Desktop.svg";
+import mobileImage from "./assets/Mobile.svg";
 import audioFile from "./assets/probass-hardi-dobrogo-vechora-mi-z-ukraini-(meloua.com).mp3";
 import "./App.css";
 
@@ -10,23 +10,21 @@ function App() {
 
   useEffect(() => {
     const handleUserInteraction = () => {
-      setHasInteracted(true);
-      if (audioRef.current) {
-        audioRef.current.play().catch((err) => {
-          console.warn("Playback failed:", err);
-        });
-      }
+      setTimeout(() => {
+        if (audioRef.current) {
+          audioRef.current.play().catch((err) => {
+            console.warn("Playback failed:", err);
+          });
+        }
+      }, 0);
+
       window.removeEventListener("click", handleUserInteraction);
-      window.removeEventListener("touchstart", handleUserInteraction);
     };
 
-    // Listen to both desktop and mobile interaction
     window.addEventListener("click", handleUserInteraction);
-    window.addEventListener("touchstart", handleUserInteraction);
 
     return () => {
       window.removeEventListener("click", handleUserInteraction);
-      window.removeEventListener("touchstart", handleUserInteraction);
     };
   }, []);
 
@@ -37,7 +35,7 @@ function App() {
         <img src={mobileImage} alt="Responsive" />
       </picture>
 
-      <audio ref={audioRef} src={audioFile} />
+      <audio ref={audioRef} src={audioFile} preload="auto" />
     </main>
   );
 }
