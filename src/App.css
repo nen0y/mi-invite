@@ -11,3 +11,13 @@ picture {
   display: block;
   height: 100%;
 }
+
+main {
+  position: relative;
+}
+
+.cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}

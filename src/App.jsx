@@ -2,7 +2,8 @@ import { useEffect, useRef } from "react";
 
 import desktopImage from "./assets/Desktop.svg";
 import mobileImage from "./assets/Mobile.svg";
-import audioFile from "./assets/probass-hardi-dobrogo-vechora-mi-z-ukraini-(meloua.com).mp3";
+import cta from "./assets/CTA.svg";
+import audioFile from "./assets/Ben E. King - Stand By Me.mp3";
 import "./App.css";
 
 function App() {
@@ -36,6 +37,10 @@ function App() {
       </picture>
 
       <audio ref={audioRef} src={audioFile} preload="auto" />
+
+      <div className="cta">
+        <img src={cta} alt="" />
+      </div>
     </main>
   );
 }
