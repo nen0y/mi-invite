@@ -8,18 +8,23 @@ import "./App.css";
 
 function App() {
   const audioRef = useRef(null);
+  const hasInteractedRef = useRef(false); // tracks playback state
 
   useEffect(() => {
     const handleUserInteraction = () => {
-      setTimeout(() => {
-        if (audioRef.current) {
-          audioRef.current.play().catch((err) => {
-            console.warn("Playback failed:", err);
-          });
-        }
-      }, 0);
+      if (!audioRef.current) return;
 
-      window.removeEventListener("click", handleUserInteraction);
+      const audio = audioRef.current;
+
+      if (!hasInteractedRef.current) {
+        audio.play().catch((err) => {
+          console.warn("Playback failed:", err);
+        });
+        hasInteractedRef.current = true;
+      } else {
+        audio.pause();
+        hasInteractedRef.current = false;
+      }
     };
 
     window.addEventListener("click", handleUserInteraction);
